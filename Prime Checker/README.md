@@ -1,4 +1,4 @@
-#Prime Checker
+# Prime Checker
 You are given a class Solution and its main method in the editor. Your task is to create a class Prime. The class Prime should contain a single method checkPrime.
 
 The locked code in the editor will call the checkPrime method with one or more integer arguments. You should write the checkPrime method in such a way that the code prints only the prime numbers.
@@ -11,15 +11,15 @@ Note: You may get a compile time error in this problem due to the statement belo
 ```
 This was added intentionally, and you have to figure out a way to get rid of the error.
 
-###Input Format
+### Input Format
 
 There are only five lines of input, each containing one integer.
 
-###Output Format
+### Output Format
 
 There will be only four lines of output. Each line contains only prime numbers depending upon the parameters passed to checkPrime in the main method of the class Solution. In case there is no prime number, then a blank line should be printed.
 
-###Sample Input
+### Sample Input
 
 ```
 2
@@ -28,7 +28,7 @@ There will be only four lines of output. Each line contains only prime numbers d
 4
 5
 ```
-###Sample Output
+### Sample Output
 ```
 2 
 2 
