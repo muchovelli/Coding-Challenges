@@ -1,9 +1,9 @@
 public class Solution {
     public void gameOfLife(int[][] board) {
-        
+        board = nextGen(board, board.length, board[0].length);
     }
 
-    private void nextGen(int[][] board, int n, int m) {
+    private int[][] nextGen(int[][] board, int n, int m) {
         int[][] future = new int[n][m];
 
         for(int i = 0; i < n; i++) {
