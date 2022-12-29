@@ -1,46 +1,55 @@
-import java.lang.reflect.Array;
 import java.util.*;
 
 class Solution {
-    public boolean validPath(int n, int[][] edges, int source, int destination) {
-        if(source == destination || edges.length == 0) {
-            return true;
-        }
-        ArrayList<Integer>[] graph = createGraph(n,edges);
-
-        return search(source,destination,graph);
+    public static void main(String[] args) {
+        int[][] matrix = {{0, 1}, {0, 2}, {3, 5}, {5, 4}, {4, 3}};
+        System.out.println(validPath(6, matrix, 0, 5));
     }
 
-    private ArrayList<Integer>[] createGraph(int n, int[][] edges) {
-        ArrayList<Integer>[] list = (ArrayList<Integer>[]) Array.newInstance(ArrayList.class,n);
+    public static boolean validPath(int n, int[][] edges, int source, int destination) {
+        if (source == destination || edges.length == 0) {
+            return true;
+        }
+        ArrayList<ArrayList<Integer>> graph = createGraph(n, edges);
 
-        for(int i = 0; i < n; i++) {
-            list[i] = new ArrayList<>();
+        return search(source, destination, graph);
+    }
+
+    private static ArrayList<ArrayList<Integer>> createGraph(int n, int[][] edges) {
+        System.out.println("Creating graph " + Arrays.deepToString(edges));
+        ArrayList<ArrayList<Integer>> list = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            list.add(new ArrayList<>());
         }
 
-        for(int[] edge : edges){
-            list[edge[0]].add(edge[1]);
-            list[edge[1]].add(edge[0]);
+        for (int[] edge : edges) {
+            System.out.println("Adding edge " + Arrays.toString(edge));
+            list.get(edge[0]).add(edge[1]);
+            list.get(edge[1]).add(edge[0]);
         }
+        System.out.println(list.toString());
         return list;
     }
 
-    public boolean search(Integer nodeValue, Integer searchValue, ArrayList<Integer>[] graph) {
+    public static boolean search(Integer nodeValue, Integer searchValue, ArrayList<ArrayList<Integer>> graph) {
         HashSet<Integer> visitedNodes = new HashSet<>();
         Queue<Integer> nodesToVisit = new LinkedList<>();
-        
-        nodesToVisit.add(nodeValue);
 
-        while(nodesToVisit.size() > 0) {
-            Integer currentNode = nodesToVisit.poll();
+        nodesToVisit.add(nodeValue);
+        System.out.println("Searching for " + searchValue + " starting at " + nodeValue);
+
+        while (!nodesToVisit.isEmpty()) {
+            Integer currentNode = nodesToVisit.remove();
+            System.out.println("Visiting " + currentNode);
+            if (currentNode == searchValue) {
+                return true;
+            }
             visitedNodes.add(currentNode);
-            for(Integer nextNode : graph[currentNode]) {
-                if(!visitedNodes.contains(nextNode)) {
-                    if(nextNode.equals(searchValue)) {
-                        return true;
-                    }
+            for (Integer neighbor : graph.get(currentNode)) {
+                if (!visitedNodes.contains(neighbor)) {
+                    nodesToVisit.add(neighbor);
                 }
-                nodesToVisit.add(nextNode);
             }
         }
         return false;
